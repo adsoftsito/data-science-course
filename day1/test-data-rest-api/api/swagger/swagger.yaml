@@ -79,6 +79,67 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
+  /bancos:
+    x-swagger-router-controller: data.controller
+    get:
+      description: get the game system list
+      operationId: getBancos
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetBancoListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /censobymun:
+    x-swagger-router-controller: data.controller
+    get:
+      description: get the game system list
+      operationId: getCensosByMun
+      parameters:
+        - name: entidad
+          in: query
+          type: string
+          required: true
+        - name: municipio
+          in: query
+          type: string
+          required: true
+      
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetCensoListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /censobyedo:
+    x-swagger-router-controller: data.controller
+    get:
+      description: get the game system list
+      operationId: getCensosByEdo
+      parameters:
+        - name: entidad
+          in: query
+          type: string
+          required: true
+      
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetCensoListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
   /swagger:
     x-swagger-pipe: swagger_raw
@@ -140,3 +201,56 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/GetEntidadResponse"
+
+  GetBancoResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        description: identifier
+      tipo:
+        type: string
+        description: Name of the game
+      descripcion:
+        type: string
+        description: Developer of the game
+  
+  GetBancoListResponse:
+    required:
+      - videogames
+    properties:
+      videogames:
+        type: array
+        items:
+          $ref: "#/definitions/GetBancoResponse"
+          
+
+  GetCensoResponse:
+    type: object
+    properties:
+   #   id:
+  #      type: string
+  #      description: identifier
+      idestado:
+        type: string
+        description: Name of the Game System
+      idmunicipio:
+        type: string
+        description: Description of the Game System
+      #actividad_economica:
+      #  type: string
+      #  description: gps latitud
+      #ue:
+      #  type: string
+      #  description: gps longitud
+     
+    
+  GetCensoListResponse:
+    required:
+      - gamesystems
+    properties:
+      gamesystems:
+        type: array
+        items:
+          $ref: "#/definitions/GetCensoResponse"
+
