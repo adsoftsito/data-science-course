@@ -42,6 +42,44 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /entidades:
+    x-swagger-router-controller: data.controller
+    get:
+      description: get the game system list
+      operationId: getEstados
+
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetEntidadListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /municipios:
+    x-swagger-router-controller: data.controller
+    get:
+      description: get the game system list
+      operationId: getMunicipios
+      parameters:
+        - name: entidad
+          in: query
+          type: string
+          required: true
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetMunicipioListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -58,3 +96,47 @@ definitions:
     properties:
       message:
         type: string
+
+  GetMunicipioResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        description: identifier
+      idmunicipio:
+        type: string
+        description: Name of the game
+      municipio:
+        type: string
+        description: Developer of the game
+  
+  GetMunicipioListResponse:
+    required:
+      - videogames
+    properties:
+      videogames:
+        type: array
+        items:
+          $ref: "#/definitions/GetMunicipioResponse"
+
+  GetEntidadResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        description: identifier
+      idestado:
+        type: string
+        description: Name of the game
+      estado:
+        type: string
+        description: Developer of the game
+  
+  GetEntidadListResponse:
+    required:
+      - videogames
+    properties:
+      videogames:
+        type: array
+        items:
+          $ref: "#/definitions/GetEntidadResponse"
