@@ -4,8 +4,7 @@ const { Bancos } = require('../models'); // Sequelize
 const { Censos } = require('../models'); // Sequelize
 const { Denues } = require('../models'); // Sequelize
 
-const MODULE_NAME = '[GameSystem Controller]';
-// get estados
+const MODULE_NAME = '[data Controller]';
 
 function getEstados(req, res) {
 
@@ -13,16 +12,11 @@ function getEstados(req, res) {
         console.log("Estados...");
         console.log(Estados);
         Estados.findAll({
-            /*include: [{
-            model: orderstatus
-            }]
-    
-                include: [{ all: true, nested: true }]*/
             })
         .then((estados) => {
             console.log(estados);
             res.status(200).send(estados);
-            //utils.writeJson(res, consoles);
+          
         }, (error) => {
             res.status(500).send(error);
         });
@@ -44,23 +38,13 @@ function getMunicipios(req, res) {
       console.log(Municipios);
       Municipios.findAll(
         {
-          /*include: [{
-            model: Internets,
-            nested: false,
-            as: 'Internets',
-            attributes: ['habitadas'],
-          }]
-         // include: [{ all: true, nested: true }]
-          , */
             where: {
               idestado : params.entidad
-            }
-            //attributes: ['cve_mun', 'municipio'],
+            }          
         })
-      .then((consoles) => {
-        console.log(consoles);
-        res.status(200).send(consoles);
-        //utils.writeJson(res, consoles);
+      .then((municipios) => {
+        console.log(municipios);
+        res.status(200).send(municipios);        
       }, (error) => {
         console.log("error : " + error);
         res.status(500).send(error);
@@ -74,32 +58,14 @@ function getMunicipios(req, res) {
 
 function getBancos(req, res) {
   try {
-        
-    //var params = {
-    //  entidad:   req.swagger.params.entidad.value
-    //};
-
     console.log("Bancos...");
     console.log(Bancos);
     Bancos.findAll(
-      {
-        /*include: [{
-          model: Internets,
-          nested: false,
-          as: 'Internets',
-          attributes: ['habitadas'],
-        }]
-       // include: [{ all: true, nested: true }]
-        , */
-        //  where: {
-        //    idestado : params.entidad
-        //  }
-          //attributes: ['cve_mun', 'municipio'],
+      {       
       })
     .then((bancos) => {
       console.log(bancos);
-      res.status(200).send(bancos);
-      //utils.writeJson(res, consoles);
+      res.status(200).send(bancos);      
     }, (error) => {
       console.log("error : " + error);
       res.status(500).send(error);
@@ -123,12 +89,6 @@ function getCensosByMun(req, res) {
     console.log("censos..." + params);
     console.log(Censos);
     Censos.findAll({
-     /*include: [{
-       model: orderstatus
-      
-     }]
- 
-     include: [{ all: true, nested: true }]*/
      where: {
       idestado : params.entidad,
       idmunicipio : params.municipio,
@@ -136,9 +96,7 @@ function getCensosByMun(req, res) {
     }
        })
     .then((censos) => {
-      //console.log(consoles);
       res.status(200).send(censos);
-      //utils.writeJson(res, consoles);
     }, (error) => {
       console.log("error : " + error);
       res.status(500).send(error);
@@ -162,12 +120,6 @@ function getCensosByEdo(req, res) {
     console.log("censos..." + params);
     console.log(Censos);
     Censos.findAll({
-     /*include: [{
-       model: orderstatus
-      
-     }]
- 
-     include: [{ all: true, nested: true }]*/
      where: {
       idestado : params.entidad,
       actividad: 'Total municipal'
@@ -175,9 +127,7 @@ function getCensosByEdo(req, res) {
     }
        })
     .then((censos) => {
-      //console.log(consoles);
       res.status(200).send(censos);
-      //utils.writeJson(res, consoles);
     }, (error) => {
       console.log("error : " + error);
       res.status(500).send(error);
@@ -195,34 +145,29 @@ function getDenues(req, res) {
         
     var params = {
       entidad:   req.swagger.params.entidad.value,
-      municipio: req.swagger.params.municipio.value
+      municipio: req.swagger.params.municipio.value,
+      tipo: req.swagger.params.tipo.value
+
     };
 
     console.log("Denues..." + params);
     console.log(Denues);
     Denues.findAll({
-     /*include: [{
-       model: orderstatus
-      
-     }]
- 
-     include: [{ all: true, nested: true }]*/
      where: {
-      cve_ent : params.entidad,
-      cve_mun : params.municipio
+      idestado : params.entidad,
+      idmunicipio : params.municipio,
+      tipo : params.tipo
     }
        })
-    .then((consoles) => {
-      //console.log(consoles);
-      res.status(200).send(consoles);
-      //utils.writeJson(res, consoles);
+    .then((denues) => {
+      res.status(200).send(denues);
     }, (error) => {
       console.log("error : " + error);
       res.status(500).send(error);
     });
  
    } catch (error) {
-     controllerHelper.handleErrorResponse(MODULE_NAME, getGameSystems.name, error, res);
+     controllerHelper.handleErrorResponse(MODULE_NAME, getDenues.name, error, res);
    }
   
 
@@ -234,10 +179,8 @@ module.exports = {
     getBancos,
     getCensosByMun,
     getCensosByEdo,
-
-    // GS_CT_ERR_GAMESYSTEM_NOT_FOUND,
-   // GS_CT_DELETED_SUCCESSFULLY,
+    getDenues,
     MODULE_NAME
-  }
+}
 
     

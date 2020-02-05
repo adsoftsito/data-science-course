@@ -19,7 +19,6 @@ produces:
   - application/json
 paths:
   /hello:
-    # binds a127 app logic to a route
     x-swagger-router-controller: hello_world
     get:
       description: Returns 'Hello' to the caller
@@ -141,6 +140,36 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
+  /denues:
+    x-swagger-router-controller: data.controller
+    get:
+      description: get the game system list
+      operationId: getDenues
+      parameters:
+        - name: entidad
+          in: query
+          type: string
+          required: true
+        - name: municipio
+          in: query
+          type: string
+          required: true
+        - name: tipo
+          in: query
+          type: string
+          required: true
+      
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetDenueListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -228,22 +257,12 @@ definitions:
   GetCensoResponse:
     type: object
     properties:
-   #   id:
-  #      type: string
-  #      description: identifier
       idestado:
         type: string
         description: Name of the Game System
       idmunicipio:
         type: string
         description: Description of the Game System
-      #actividad_economica:
-      #  type: string
-      #  description: gps latitud
-      #ue:
-      #  type: string
-      #  description: gps longitud
-     
     
   GetCensoListResponse:
     required:
@@ -253,4 +272,23 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/GetCensoResponse"
+
+  GetDenueResponse:
+    type: object
+    properties:
+      idestado:
+        type: string
+        description: Name of the Game System
+      idmunicipio:
+        type: string
+        description: Description of the Game System
+    
+  GetDenueListResponse:
+    required:
+      - gamesystems
+    properties:
+      gamesystems:
+        type: array
+        items:
+          $ref: "#/definitions/GetDenueResponse"
 
