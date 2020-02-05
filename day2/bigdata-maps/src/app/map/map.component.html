@@ -1,3 +1,29 @@
+<div> 
+        
+  <label class="container"> 
+       <b> Estado </b>
+         
+       <!--
+       <select matInput class="custon-select form-control" name="selectedMunicipio" id="selectedMunicipio" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedMunicipio">
+          <option
+           *ngFor="let mun of arrMunicipios" [ngValue]="mun.id">{{mun.description}}</option>
+       </select>
+      -->
+
+       <select  name="selectedMunicipio" id="selectedMunicipio" [(ngModel)]="selectedMunicipio">
+        <option *ngFor="let edo of arrEstados; let i = index" [value]="edo.idestado">
+          {{edo.estado}}
+        </option>
+      </select>
+      {{selectedMunicipio}}
+
+       <b> Municipio </b>
+       
+       <b> Unidad Economica </b>
+       
+</label>
+</div>
+
 <div class="map-container">
   <div class="map-frame">
     <div id="map"></div>

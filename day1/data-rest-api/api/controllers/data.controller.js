@@ -14,20 +14,22 @@ console.log(Estados);
 Estados.findAll({
 })
 .then((estados) => {
-console.log(estados);
-res.status(200).send(estados);
+    console.log(estados);
+    res.status(200).send(estados);
 }, (error) => {
-res.status(500).send(error);
+    res.status(500).send(error);
 });
 } catch (error) {
-controllerHelper.handleErrorResponse(MODULE_NAME, getEstados.name, error, res);
+    controllerHelper.handleErrorResponse(MODULE_NAME, getEstados.name, error, res);
 }
 }
 function getMunicipios(req, res) {
 try {
+
 var params = {
 entidad: req.swagger.params.entidad.value
 };
+
 console.log("municipios..." + params);
 console.log(Municipios);
 Municipios.findAll(

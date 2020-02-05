@@ -4,12 +4,11 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-
-import { MarkerService } from './services/marker.service';
-import { PopUpService } from './services/pop-up.service';
+import { MarkerService } from './_services/marker.service';
+import { PopUpService } from './_services/pop-up.service';
 
 import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -18,9 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [MarkerService, PopUpService],
   bootstrap: [AppComponent]

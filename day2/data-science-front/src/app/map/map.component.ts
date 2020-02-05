@@ -1,7 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
-import { MarkerService } from '../services/marker.service';
-import { DataApiService } from '../services/data-api.service';
+import { icon, Marker } from 'leaflet';
+
+import { MarkerService } from '../_services/marker.service';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -18,28 +19,23 @@ const iconDefault = L.icon({
 });
 L.Marker.prototype.options.icon = iconDefault;
 
+
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-
 export class MapComponent implements AfterViewInit {
   private map;
 
-  selectedMunicipio;
-  arrEstados = [];
+  constructor(private markerService: MarkerService) {
+  }
 
-  constructor(private markerService: MarkerService,
-    private dataApiService: DataApiService
-    ) 
-    { }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     this.initMap();
-    //this.markerService.makeCapitalMarkers(this.map);
-    this.markerService.makeDenuesMarkers(this.map);
-    this.getEstados();
+    this.markerService.makeCapitalMarkers(this.map);
 
   }
 
@@ -50,20 +46,11 @@ export class MapComponent implements AfterViewInit {
     });
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-     maxZoom: 19,
-     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      maxZoom: 19,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
     tiles.addTo(this.map);
-  }
-
- private getEstados()
- {
-  this.dataApiService.getEstados().subscribe((estados: any) => {
-    // alert(res);
-    this.arrEstados = estados;
-
-   });
  
- }
+  }
 }

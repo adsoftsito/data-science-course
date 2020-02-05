@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Denues } from '../models/denues';
+import { Estados } from '../models/estados';
+
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
@@ -29,6 +31,16 @@ export class DataApiService {
   }  
 
   
+  getEstados(): Observable<Estados> {
+    console.log("estados: " + this.apiURL);
+    return this.http.get<Estados>(this.apiURL + 'entidades', this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }   
+
+
   getDenues(idestado, idmunicipio, tipo): Observable<Denues> {
     console.log("denues: " + this.apiURL + idestado);
     return this.http.get<Denues>(this.apiURL + 'denues?entidad=' + idestado +
