@@ -15,9 +15,9 @@ export class MarkerService {
     private popupService: PopUpService,
     private dataApiService: DataApiService) { }
 
-    makeDenuesMarkers(map: L.map): void {
+    makeDenuesMarkers(map: L.map, idestado, idmunicipio, actividad): void {
    
-      this.dataApiService.getDenues(30, 118, 522110).subscribe((res: any) => {
+      this.dataApiService.getDenues(idestado, idmunicipio, actividad).subscribe((res: any) => {
        // alert(res);
 
         for (const c of res) {

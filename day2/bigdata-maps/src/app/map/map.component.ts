@@ -27,8 +27,13 @@ L.Marker.prototype.options.icon = iconDefault;
 export class MapComponent implements AfterViewInit {
   private map;
 
+  selectedEstado;
   selectedMunicipio;
+  selectedUnidad;
+
   arrEstados = [];
+  arrMunicipios = [];
+  arrActividades = [];
 
   constructor(private markerService: MarkerService,
     private dataApiService: DataApiService
@@ -38,9 +43,8 @@ export class MapComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.initMap();
     //this.markerService.makeCapitalMarkers(this.map);
-    this.markerService.makeDenuesMarkers(this.map);
     this.getEstados();
-
+    this.getUnidades();
   }
 
   private initMap(): void {
@@ -60,10 +64,39 @@ export class MapComponent implements AfterViewInit {
  private getEstados()
  {
   this.dataApiService.getEstados().subscribe((estados: any) => {
-    // alert(res);
     this.arrEstados = estados;
+   });
+ 
+ }
+
+ private getUnidades()
+ {
+  this.dataApiService.getUnidades().subscribe((unidades: any) => {
+    this.arrActividades = unidades;
+   });
+ 
+ }
+ 
+ private changeEstado()
+ {
+   //alert(this.selectedEstado);
+   this.dataApiService.getMunicipios(this.selectedEstado).subscribe((municipios: any) => {
+    // alert(res);
+    this.arrMunicipios = municipios;
 
    });
  
+ }
+ 
+
+ private buscarDenues()
+ {
+
+  this.markerService.makeDenuesMarkers(this.map,
+    this.selectedEstado,
+    this.selectedMunicipio,
+    this.selectedUnidad
+    );
+
  }
 }
