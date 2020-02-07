@@ -7,7 +7,11 @@ const { Denues } = require('../models'); // Sequelize
 const MODULE_NAME = '[data Controller]';
 
 function getEstados(req, res) {
-
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+  
 try {
 console.log("Estados...");
 console.log(Estados);
@@ -24,7 +28,12 @@ Estados.findAll({
 }
 }
 function getMunicipios(req, res) {
-try {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+  
+    try {
 
 var params = {
 entidad: req.swagger.params.entidad.value
@@ -51,6 +60,11 @@ controllerHelper.handleErrorResponse(MODULE_NAME, getGameSystems.name, error, re
 }
 
 function getBancos(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+
 try {
 console.log("Bancos...");
 console.log(Bancos);
@@ -70,6 +84,11 @@ controllerHelper.handleErrorResponse(MODULE_NAME, getBancos.name, error, res);
 }
 
 function getCensosByMun(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+
 try {
 var params = {
 entidad: req.swagger.params.entidad.value,
@@ -97,6 +116,11 @@ controllerHelper.handleErrorResponse(MODULE_NAME, getCensosByMun.name, error, re
 
 
 function getCensosByEdo(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+
 try {
 var params = {
 entidad: req.swagger.params.entidad.value
@@ -123,6 +147,11 @@ controllerHelper.handleErrorResponse(MODULE_NAME, getCensosByEdo.name, error, re
 }
 
 function getDenues(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+
 try {
 var params = {
 entidad: req.swagger.params.entidad.value,

@@ -79,9 +79,8 @@ export class MapComponent implements AfterViewInit {
  
  private changeEstado()
  {
-   //alert(this.selectedEstado);
-   this.dataApiService.getMunicipios(this.selectedEstado).subscribe((municipios: any) => {
-    // alert(res);
+   this.dataApiService.getMunicipios(this.selectedEstado)
+   .subscribe((municipios: any) => {
     this.arrMunicipios = municipios;
 
    });
@@ -99,4 +98,6 @@ export class MapComponent implements AfterViewInit {
     );
 
  }
+
+ 
 }

@@ -18,17 +18,18 @@ export class MarkerService {
     makeDenuesMarkers(map: L.map, idestado, idmunicipio, actividad): void {
    
       this.dataApiService.getDenues(idestado, idmunicipio, actividad).subscribe((res: any) => {
-       // alert(res);
-
         for (const c of res) {
-
           const lat = parseFloat(c.lat);
-        
           const lon = parseFloat(c.lng);
-         // alert(lat);
-         // alert(lon);
-
-          const marker = L.marker([lat, lon]);
+          const marker = L.marker([lat, lon],
+            {
+              icon: L.icon({
+              iconSize: [ 25, 41 ],
+              iconAnchor: [ 13, 41 ],
+              iconUrl: 'assets/'+ actividad  + '.png',
+              shadowUrl: 'assets/marker-shadow.png'
+              })
+            }); 
 
           marker.bindPopup(this.popupService.makeDenuesPopup(c));
           marker.addTo(map);

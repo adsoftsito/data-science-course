@@ -15,7 +15,9 @@ export class DataApiService {
 
  
 
-  apiURL = 'http://localhost:10010/';
+  //apiURL = 'http://localhost:10010/';
+  apiURL = 'https://groovy-rope-255618.nn.r.appspot.com/';
+  
   
   constructor(
     private http: HttpClient,
@@ -28,7 +30,9 @@ export class DataApiService {
   // Http Options
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin':'*'
+
     })
   }  
 
