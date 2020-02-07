@@ -17,11 +17,12 @@
     "operatorsAliases": false
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "postgres",
+    "password": "adsoft",
+    "database": "data-science-db",
+    "host": "35.239.136.79",
     "dialect": "postgres",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "port" : 5432
   }
 }

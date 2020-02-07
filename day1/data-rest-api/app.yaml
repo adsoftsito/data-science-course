@@ -14,5 +14,5 @@ endpoints_api_service:
   name: valid-decoder-258800.appspot.com
   #rollout_strategy: managed 
   # Copyright 2015-2016, Google, 
-  config_id: 2020-02-06r0
+  config_id: 2020-02-07r1
 # [END configuration]
