@@ -16,7 +16,7 @@ export class DataApiService {
  
 
   //apiURL = 'http://localhost:10010/';
-  apiURL = 'https://groovy-rope-255618.nn.r.appspot.com/';
+  apiURL = 'https://valid-decoder-258800.appspot.com/';
   
   
   constructor(
